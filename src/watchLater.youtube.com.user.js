@@ -19,6 +19,20 @@
  */
 
 /**
+ * mobile web version
+ * research test page
+ */
+/**
+ * mobile web version
+ * touch 
+ * 2 tap add
+ * 2 tap panright add
+ * 2 tap panleft delete
+ * 2 tap panup move to top
+ * 2 tap pandown move to top
+ */
+
+/**
  * https://greasyfork.org/en/scripts/478696-youtube-button-as-add-notify-video-to-wl/code
  */
 

@@ -22,7 +22,9 @@
  * mobile web version
  * research test page
  */
-
+/**
+ * mini player at /playlist?list=WL position left
+ */
 /**
  * moveToAfter 10 nth press 1
  * moveToAfter 20 nth press 2

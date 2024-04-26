@@ -22,6 +22,15 @@
  * mobile web version
  * research test page
  */
+
+/**
+ * moveToAfter 10 nth press 1
+ * moveToAfter 20 nth press 2
+ * moveToAfter 30 nth press 3
+ * moveToAfter 40 nth press 4
+ * moveToAfter 50 nth press 5
+ */
+
 /**
  * mobile web version
  * touch 

@@ -1301,3 +1301,179 @@ function apiRestful_moveToDown() {
         })
     });
 }
+
+function apiRestful_moveToAfter() {
+    return fetch('https://www.youtube.com/youtubei/v1/browse/edit_playlist?prettyPrint=false', {
+        method: 'POST',
+        headers: {
+            'accept': '*/*',
+            'accept-language': 'en-US,en;q=0.9,vi;q=0.8',
+            'authorization': 'SAPISIDHASH 1714097933_1c612e7c1bc548f935519f87930e6148fda85511',
+            'content-type': 'application/json',
+            'cookie': 'VISITOR_INFO1_LIVE=vzKC5Lkkt4Y; VISITOR_INFO1_LIVE=vzKC5Lkkt4Y; VISITOR_PRIVACY_METADATA=CgJWThIEGgAgSw%3D%3D; VISITOR_PRIVACY_METADATA=CgJWThIEGgAgSw%3D%3D; LOGIN_INFO=AFmmF2swRQIhAPiEz9MH7LfegII9kAIxw7xGExHo4x7OcgZiHjvPJW42AiBJrM0a51iEXnmG8Q0E3t4rqsCPi3QhzduNORVBtA7Qcg:QUQ3MjNmeUp2Z3BQNmN3a1ZTb1dtS0RyaGdpTll6dkdJNFRTVnJIQWEyOFR5c21NLVpXOHJjWXZKdGFndzVDNEZNczZ5WjZqYnJuS2pqTlRDOWhVX0F4cHpEak9VaHQtbVZfc3NnOHJaRkhPTEV6QkN0ZHVkbEo3YVM5RXQ1X3R5bW0tZXkxd3dfWTdqUE5RbnZVcXd6MzVEZ3daZzZQalFR; SID=g.a000iwglKqERwomCmUmirDRnRiUmiB8ze1CDAGRGVUL0o7AhBmcQHI4fYWqk-JgoOlis4IMyLgACgYKAZYSAQASFQHGX2MiEfRSG4odkTq0nxGwE7HzFRoVAUF8yKrWTGnIYpZIDbwuL7efjozz0076; __Secure-1PSID=g.a000iwglKqERwomCmUmirDRnRiUmiB8ze1CDAGRGVUL0o7AhBmcQfsLX8j1e_UrbjgBRLD4JewACgYKAUQSAQASFQHGX2MiG4HklqmmCgTL7mhPAkO7IBoVAUF8yKol5-wua_R_Tp0cLPNmnkXQ0076; __Secure-3PSID=g.a000iwglKqERwomCmUmirDRnRiUmiB8ze1CDAGRGVUL0o7AhBmcQkFkqJ3dBY2HoSM-uXNodrgACgYKAVsSAQASFQHGX2MiTX0NQxXbwVzi8kl-spqaYBoVAUF8yKoI6g58e2BqXJ2YqMSuK5Ej0076; HSID=APLKfrFgb4Oqz9LdY; SSID=ArZgtjAICqqqKuCDa; APISID=51-mbtvY-9wM4Bt2/A-bcmxx5iXlF7xzyX; SAPISID=Sbfs4i7gvxHCu4ph/AXeIGb1RorA3qkEsw; __Secure-1PAPISID=Sbfs4i7gvxHCu4ph/AXeIGb1RorA3qkEsw; __Secure-3PAPISID=Sbfs4i7gvxHCu4ph/AXeIGb1RorA3qkEsw; YSC=9NXy3FZiBVg; PREF=tz=Etc.GMT-7&f5=30000&f6=40000000; wide=0; __Secure-1PSIDTS=sidts-CjEBLwcBXLU_NkpTsJ87RCBSnQgFfWs9vpy7jEOoyuqn71CKXLPgoIUE2eSoMilvAk5HEAA; __Secure-3PSIDTS=sidts-CjEBLwcBXLU_NkpTsJ87RCBSnQgFfWs9vpy7jEOoyuqn71CKXLPgoIUE2eSoMilvAk5HEAA; CONSISTENCY=AKreu9uLYWVBvqv_8DKZPDr5DJ2x3TcUapRKqVsHkTX_VsI_wv_gNzrGwjVqkewJz2iBChtR335Ipz6jIadlKfKh0-DOJAg--2KWquU1fdVc0Lt86xmEfyDBkKCiHk642znfx7xkAyufCijC8lfNPLtK6aOI9lEoXKuvveszoOpFHzqtI7--g5wz1WbNIfkFOwKgMdJ9Mjd2Iv5f9Nc; SIDCC=AKEyXzWafPvlMl741VhhAW-qZ7-PwMFR80eFS--in5c-fPil-mYLVqJOtpWatsPKHmheXkLZyw; __Secure-1PSIDCC=AKEyXzX9crc_QA-0LdmLzmU8FfWFPGjKF9amonoio8dfFE-DPB7ow6MCty_-l6Axjm2GxjdIm8k; __Secure-3PSIDCC=AKEyXzULVsQmUGvC9wSCUVBhtWWf83LyXkCeGuYnfEEbQiNwWvcnVerK0ueZwMIqlL_sjflGtw; ST-1x29qd6=session_logininfo=AFmmF2swRQIhAPiEz9MH7LfegII9kAIxw7xGExHo4x7OcgZiHjvPJW42AiBJrM0a51iEXnmG8Q0E3t4rqsCPi3QhzduNORVBtA7Qcg%3AQUQ3MjNmeUp2Z3BQNmN3a1ZTb1dtS0RyaGdpTll6dkdJNFRTVnJIQWEyOFR5c21NLVpXOHJjWXZKdGFndzVDNEZNczZ5WjZqYnJuS2pqTlRDOWhVX0F4cHpEak9VaHQtbVZfc3NnOHJaRkhPTEV6QkN0ZHVkbEo3YVM5RXQ1X3R5bW0tZXkxd3dfWTdqUE5RbnZVcXd6MzVEZ3daZzZQalFR',
+            'dnt': '1',
+            'origin': 'https://www.youtube.com',
+            'priority': 'u=1, i',
+            'referer': 'https://www.youtube.com/playlist?list=WL',
+            'sec-ch-ua': '"Chromium";v="124", "Not-A.Brand";v="99", "Google Chrome";v="124"',
+            'sec-ch-ua-arch': '"x86"',
+            'sec-ch-ua-bitness': '"64"',
+            'sec-ch-ua-full-version': '"124.0.6367.61"',
+            'sec-ch-ua-full-version-list': '"Chromium";v="124.0.6367.61", "Not-A.Brand";v="99.0.0.0", "Google Chrome";v="124.0.6367.61"',
+            'sec-ch-ua-mobile': '?0',
+            'sec-ch-ua-model': '""',
+            'sec-ch-ua-platform': '"Windows"',
+            'sec-ch-ua-platform-version': '"10.0.0"',
+            'sec-ch-ua-wow64': '?0',
+            'sec-fetch-dest': 'empty',
+            'sec-fetch-mode': 'same-origin',
+            'sec-fetch-site': 'same-origin',
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+            'x-goog-authuser': '0',
+            'x-goog-visitor-id': 'Cgt2ektDNUxra3Q0WSjon6yxBjIKCgJWThIEGgAgSw%3D%3D',
+            'x-origin': 'https://www.youtube.com',
+            'x-youtube-bootstrap-logged-in': 'true',
+            'x-youtube-client-name': '1',
+            'x-youtube-client-version': '2.20240425.01.00'
+        },
+        body: JSON.stringify({
+            'context': {
+                'client': {
+                    'hl': 'en',
+                    'gl': 'VN',
+                    'remoteHost': '113.187.109.246',
+                    'deviceMake': '',
+                    'deviceModel': '',
+                    'visitorData': 'Cgt2ektDNUxra3Q0WSjon6yxBjIKCgJWThIEGgAgSw%3D%3D',
+                    'userAgent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36,gzip(gfe)',
+                    'clientName': 'WEB',
+                    'clientVersion': '2.20240425.01.00',
+                    'osName': 'Windows',
+                    'osVersion': '10.0',
+                    'originalUrl': 'https://www.youtube.com/playlist?list=WL',
+                    'platform': 'DESKTOP',
+                    'clientFormFactor': 'UNKNOWN_FORM_FACTOR',
+                    'configInfo': {
+                        'appInstallData': 'COifrLEGEO6zsAUQvoqwBRDM364FEParsAUQ6-j-EhCmmrAFEKe7sAUQ-NKwBRDe3bAFEOrDrwUQgqL_EhDnuq8FEP7gsAUQopKwBRD00LAFEOuTrgUQ4MOwBRD65LAFENfprwUQgaKwBRDKw7AFEJ7QsAUQj8SwBRDY4LAFEMjDsAUQ2uCwBRDh8q8FEOXDsAUQ0I2wBRDH_bciEPSrsAUQvbauBRDR4LAFEInorgUQ3ej-EhCI468FEO6irwUQ8ZywBRCNzLAFEL75rwUQt--vBRDm1rAFEPXgsAUQ1YiwBRCTzbAFENuvrwUQ9uSwBRCXg7AFEMfOsAUQ1tawBRDGw7AFEL2ZsAUQsdywBRDa5LAFENnJrwUQ-9qwBRCigbAFELfq_hIQvPmvBRCs2LAFEJCysAUQ0-GvBRDj0bAFEKO7sAUQpcL-EhDvzbAFEPTgsAUQiIewBRDV3bAFEIO_sAUQ4tSuBRCWlbAFEIvPsAUQlc2wBRDJ968FEP_fsAUQzMOwBRDEw7AFELvSrwUQ3oj_EhClu7AFEPOhsAUQqtiwBRCa8K8FENPgsAUQ1KGvBRDJ17AFELbgrgUQt6uwBRCD368FEPyFsAUQz6iwBRDN17AFEKiasAUQsJ3_EhCR_bciEIWUsAUQlrywBRCWpP8SKiBDQU1TRWhVSm9MMndETkhrQnFDUTlBdkwxQVFkQnc9PQ%3D%3D'
+                    },
+                    'userInterfaceTheme': 'USER_INTERFACE_THEME_DARK',
+                    'timeZone': 'Etc/GMT-7',
+                    'browserName': 'Chrome',
+                    'browserVersion': '124.0.0.0',
+                    'acceptHeader': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+                    'deviceExperimentId': 'ChxOek0yTVRrNU5UVXdNalUyTnpVNU1qZzNOQT09EOifrLEGGOefrLEG',
+                    'screenWidthPoints': 1538,
+                    'screenHeightPoints': 868,
+                    'screenPixelDensity': 1,
+                    'screenDensityFloat': 1,
+                    'utcOffsetMinutes': 420,
+                    'connectionType': 'CONN_CELLULAR_4G',
+                    'memoryTotalKbytes': '8000000',
+                    'mainAppWebInfo': {
+                        'graftUrl': 'https://www.youtube.com/playlist?list=WL',
+                        'pwaInstallabilityStatus': 'PWA_INSTALLABILITY_STATUS_UNKNOWN',
+                        'webDisplayMode': 'WEB_DISPLAY_MODE_MINIMAL_UI',
+                        'isWebNativeShareAvailable': true
+                    }
+                },
+                'user': {
+                    'lockedSafetyMode': false
+                },
+                'request': {
+                    'useSsl': true,
+                    'consistencyTokenJars': [
+                        {
+                            'encryptedTokenJarContents': 'AKreu9uLYWVBvqv_8DKZPDr5DJ2x3TcUapRKqVsHkTX_VsI_wv_gNzrGwjVqkewJz2iBChtR335Ipz6jIadlKfKh0-DOJAg--2KWquU1fdVc0Lt86xmEfyDBkKCiHk642znfx7xkAyufCijC8lfNPLtK6aOI9lEoXKuvveszoOpFHzqtI7--g5wz1WbNIfkFOwKgMdJ9Mjd2Iv5f9Nc',
+                            'expirationSeconds': '600'
+                        }
+                    ],
+                    'internalExperimentFlags': []
+                },
+                'clickTracking': {
+                    'clickTrackingParams': 'CDEQ7zsYACITCPSe2Zvp3oUDFdnZTAIdB8AIsA=='
+                },
+                'adSignalsInfo': {
+                    'params': [
+                        {
+                            'key': 'dt',
+                            'value': '1714097861465'
+                        },
+                        {
+                            'key': 'flash',
+                            'value': '0'
+                        },
+                        {
+                            'key': 'frm',
+                            'value': '0'
+                        },
+                        {
+                            'key': 'u_tz',
+                            'value': '420'
+                        },
+                        {
+                            'key': 'u_his',
+                            'value': '2'
+                        },
+                        {
+                            'key': 'u_h',
+                            'value': '900'
+                        },
+                        {
+                            'key': 'u_w',
+                            'value': '1600'
+                        },
+                        {
+                            'key': 'u_ah',
+                            'value': '900'
+                        },
+                        {
+                            'key': 'u_aw',
+                            'value': '1538'
+                        },
+                        {
+                            'key': 'u_cd',
+                            'value': '24'
+                        },
+                        {
+                            'key': 'bc',
+                            'value': '31'
+                        },
+                        {
+                            'key': 'bih',
+                            'value': '868'
+                        },
+                        {
+                            'key': 'biw',
+                            'value': '1523'
+                        },
+                        {
+                            'key': 'brdim',
+                            'value': '1920,0,1920,0,1538,0,1538,900,1538,868'
+                        },
+                        {
+                            'key': 'vis',
+                            'value': '1'
+                        },
+                        {
+                            'key': 'wgl',
+                            'value': 'true'
+                        },
+                        {
+                            'key': 'ca_type',
+                            'value': 'image'
+                        }
+                    ]
+                }
+            },
+            'actions': [
+                {
+                    'action': 'ACTION_MOVE_VIDEO_AFTER',
+                    'setVideoId': 'B2695FC1781B191B',
+                    'movedSetVideoIdPredecessor': '18D5D7609D8446DE'
+                }
+            ],
+            'params': 'CAFAAQ%3D%3D',
+            'playlistId': 'WL'
+        })
+    });
+}

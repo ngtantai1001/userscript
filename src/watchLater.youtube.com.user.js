@@ -16,6 +16,7 @@
  * https://www.youtube.com/watch?v=fmSxCYCieVk&list=WL&index=1
  * https://www.youtube.com/watch?v=nAKInYTIp_I&list=PLLsO3pH5RkAQNNuUS-2bJEyBs3o9HQkNd
  * https://www.youtube.com/watch?v=lj_kv9VXYMQ
+ * https://www.youtube.com/results?search_query=c%C3%A2u+c%C3%A1+hi%E1%BB%87p+ho%C3%A0&sp=CAI%253D
  */
 
 /**
@@ -663,11 +664,19 @@ function apiRestful_saveToPlaylistWatchLater() {
     });
 }
 
-function flash(color = 'rgba(255, 191, 0, 0.1)') {
-    document.querySelector('#content').style.background = color;
-    setTimeout(() => {
-        document.querySelector('#content').style.background = '';
-    }, 300);
+function flash(color = 'rgba(255, 191, 0, 0.1)', element = null) {
+    if (element == null) {
+
+        document.querySelector('#content').style.background = color;
+        setTimeout(() => {
+            document.querySelector('#content').style.background = '';
+        }, 300);
+    } else {
+        element.style.background = color;
+        setTimeout(() => {
+            element.style.background = '';
+        }, 300);
+    }
 }
 
 function apiRestfull_add() {

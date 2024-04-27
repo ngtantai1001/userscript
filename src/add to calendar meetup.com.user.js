@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name        New script meetup.com
+// @name        add to calendar meetup.com
 // @namespace   Violentmonkey Scripts
 // @match       https://www.meetup.com/*
 // @grant       none
@@ -25,7 +25,11 @@ document.body.addEventListener('keydown', function (e) {
     // do something
     console.log(e)
 
-    run()
+    try {
+        run()
+    } catch (error) {
+        console.log(error)
+    }
 
 });
 

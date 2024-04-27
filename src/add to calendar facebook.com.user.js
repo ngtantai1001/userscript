@@ -1,7 +1,8 @@
 // ==UserScript==
-// @name        New script facebook.com
+// @name        add to calendar facebook.com
 // @namespace   Violentmonkey Scripts
 // @match       https://www.facebook.com/*
+// @exculde     https://www.facebook.com/events/*
 // @grant       none
 // @version     1.0
 // @author      -
@@ -12,7 +13,7 @@
 
 
 // on press key alt+a
-document.body.addEventListener('keydown', function (e) {
+document.body.addEventListener('keydown', async function (e) {
     if (e.key !== 'a' || !e.altKey) return;
     e.preventDefault();
     // do something
@@ -155,6 +156,9 @@ function parseTime() {
 
 function addCalendar() {
     let title, description, datetimestart, datetimeend
+
+    DATA['link'] = DATA['link'] || window.location.href
+    console.log(DATA)
 
     title = DATA['text'].split('\n')[0]
     description = DATA['link'] + "\n\n\n" + DATA['text']

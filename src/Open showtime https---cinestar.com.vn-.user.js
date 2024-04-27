@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name        New script https://cinestar.com.vn/
+// @name        Open showtime https://cinestar.com.vn/
 // @namespace   Violentmonkey Scripts
 // @match       https://cinestar.com.vn/*
 // @grant       none

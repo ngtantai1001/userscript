@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name        New script eventbrite.com
+// @name        add to calendar eventbrite.com
 // @namespace   Violentmonkey Scripts
 // @match       https://www.eventbrite.com/*
 // @grant       none

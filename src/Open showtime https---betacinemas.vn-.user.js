@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name        New script https://betacinemas.vn/
+// @name        Open showtime https://betacinemas.vn/
 // @namespace   Violentmonkey Scripts
 // @match       https://betacinemas.vn/*
 // @grant       none

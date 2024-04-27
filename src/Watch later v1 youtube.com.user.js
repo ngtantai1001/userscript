@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name        New script youtube.com
+// @name        Watch later v1 youtube.com
 // @namespace   Violentmonkey Scripts
 // @match       https://www.youtube.com/*
 // @grant       none
@@ -16,7 +16,6 @@
  * https://www.youtube.com/watch?v=fmSxCYCieVk&list=WL&index=1
  * https://www.youtube.com/watch?v=nAKInYTIp_I&list=PLLsO3pH5RkAQNNuUS-2bJEyBs3o9HQkNd
  * https://www.youtube.com/watch?v=lj_kv9VXYMQ
- * https://www.youtube.com/results?search_query=c%C3%A2u+c%C3%A1+hi%E1%BB%87p+ho%C3%A0&sp=CAI%253D
  */
 
 /**
@@ -126,9 +125,6 @@ DATA['element_mouse_hover_nodeNames'] = [
     '[id="primary-inner"]',
 
     'ytd-watch-metadata',
-
-    'ytd-video-renderer',
-    'ytd-reel-item-renderer',
 ]
 
 // on press A add to watch later
@@ -136,6 +132,16 @@ DATA['element_mouse_hover_nodeNames'] = [
 // on press Q move top
 // on press E move bottom
 document.addEventListener('keydown', function (e) {
+    if (e.key === 'a') {
+        add();
+        console.log(e.key);
+    }
+
+    if (e.key === 'd') {
+        del();
+        console.log(e.key);
+    }
+
     if (e.key === 'q') {
         // ['ytd-masthead',
         // 'tp-yt-app-drawer',
@@ -151,66 +157,6 @@ document.addEventListener('keydown', function (e) {
         // apiRestful_moveToDown();
         flash()
         console.log(e.key);
-    }
-
-    if (e.key == 'a' || e.key == 'd') {
-        let element = elementMouseHover();
-        if (!element) return
-
-        let tgVideoId = null
-        if (tgVideoId == null) {
-            try {
-                tgVideoId = element.querySelector('a[href *= "/watch?v="]').href.match(/watch\?v=([^=&\?]+)&?/)[1];
-
-            } catch (error) {
-
-            }
-        }
-        if (tgVideoId == null) {
-            try {
-                tgVideoId = element.querySelector('a[href *= "/shorts/"]').href.match(/shorts\/([^\/\?]+)\/?/)[1];
-
-            } catch (error) {
-
-            }
-        }
-        if (tgVideoId == null) {
-            try {
-                tgVideoId = element.innerHTML.match(/watch\?v=([^=&\?]+)&?/)[0];
-            } catch (error) {
-
-            }
-        }
-        if (tgVideoId == null) {
-            try {
-                tgVideoId = element.innerHTML.match(/shorts\/([^\/\?]+)\/?/)[0];
-            } catch (error) {
-
-            }
-        }
-
-        if (tgVideoId) {
-            if (e.key == 'a') {
-                ytactsjson = [{
-                    "action": "ACTION_ADD_VIDEO",
-                    "addedVideoId": tgVideoId
-                }];
-            }
-            if (e.key == 'd') {
-                ytactsjson = [{
-                    "action": "ACTION_REMOVE_VIDEO_BY_VIDEO_ID",
-                    "removedVideoId": tgVideoId
-                }];
-            }
-            console.log(ytactsjson)
-            apiRestful_playlist(ytactsjson, 'WL').then(res => {
-                if (res.status == 200) {
-                    flash('green', element)
-                } else {
-                    flash('red', element)
-                }
-            })
-        }
     }
 });
 
@@ -664,19 +610,11 @@ function apiRestful_saveToPlaylistWatchLater() {
     });
 }
 
-function flash(color = 'rgba(255, 191, 0, 0.1)', element = null) {
-    if (element == null) {
-
-        document.querySelector('#content').style.background = color;
-        setTimeout(() => {
-            document.querySelector('#content').style.background = '';
-        }, 300);
-    } else {
-        element.style.background = color;
-        setTimeout(() => {
-            element.style.background = '';
-        }, 300);
-    }
+function flash(color = 'rgba(255, 191, 0, 0.1)') {
+    document.querySelector('#content').style.background = color;
+    setTimeout(() => {
+        document.querySelector('#content').style.background = '';
+    }, 300);
 }
 
 function apiRestfull_add() {
@@ -1548,40 +1486,5 @@ function apiRestful_moveToAfter() {
             'params': 'CAFAAQ%3D%3D',
             'playlistId': 'WL'
         })
-    });
-}
-
-async function getSApiSidHash(SAPISID, origin) {
-    function sha1(str) {
-        return window.crypto.subtle
-            .digest("SHA-1", new TextEncoder().encode(str))
-            .then((buf) => {
-                return Array.prototype.map
-                    .call(new Uint8Array(buf), (x) => ("00" + x.toString(16)).slice(-2))
-                    .join("")
-            });
-    };
-    const TIMESTAMP_MS = Date.now();
-    const digest = await sha1(`${TIMESTAMP_MS} ${SAPISID} ${origin}`);
-    return `${TIMESTAMP_MS}_${digest}`;
-}
-async function apiRestful_playlist(actions, playlistId = 'WL') {
-    return fetch("https://www.youtube.com/youtubei/v1/browse/edit_playlist?key=" + ytcfg.data_.INNERTUBE_API_KEY + "&prettyPrint=false", {
-        "headers": {
-            "accept": "*/*",
-            "authorization": "SAPISIDHASH " + await getSApiSidHash(document.cookie.split("SAPISID=")[1].split("; ")[0], window.origin),
-            "content-type": "application/json"
-        },
-        "body": JSON.stringify({
-            "context": {
-                "client": {
-                    clientName: "WEB",
-                    clientVersion: ytcfg.data_.INNERTUBE_CLIENT_VERSION
-                }
-            },
-            "actions": actions,
-            "playlistId": playlistId
-        }),
-        "method": "POST"
     });
 }

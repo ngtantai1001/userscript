@@ -125,6 +125,9 @@ DATA['element_mouse_hover_nodeNames'] = [
     '[id="primary-inner"]',
 
     'ytd-watch-metadata',
+
+    'ytd-video-renderer',
+    'ytd-reel-item-renderer',
 ]
 
 // on press A add to watch later

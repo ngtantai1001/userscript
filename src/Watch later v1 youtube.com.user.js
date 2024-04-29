@@ -132,6 +132,10 @@ DATA['element_mouse_hover_nodeNames'] = [
 // on press Q move top
 // on press E move bottom
 document.addEventListener('keydown', function (e) {
+    if (e.key === 'w' && e.altKey) {
+        window.location.href = '/playlist?list=WL'
+    }
+
     if (e.key === 'a') {
         add();
         console.log(e.key);
@@ -409,6 +413,10 @@ function moveToTop() {
     setTimeout(() => {
         [...document.querySelectorAll('yt-formatted-string')].find(el => el.textContent.match(/Move to top/i))?.click()
     }, 300);
+    setTimeout(() => {
+        let event = new KeyboardEvent('keydown', { key: 'Escape' });
+        document.dispatchEvent(event);
+    }, 1100);
 }
 
 
@@ -432,6 +440,10 @@ function moveToDown() {
     setTimeout(() => {
         [...document.querySelectorAll('yt-formatted-string')].find(el => el.textContent.match(/Move to top/i))?.click()
     }, 300);
+    setTimeout(() => {
+        let event = new KeyboardEvent('keydown', { key: 'Escape' });
+        document.dispatchEvent(event);
+    }, 1100);
 }
 
 

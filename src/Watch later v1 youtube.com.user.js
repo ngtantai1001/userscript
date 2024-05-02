@@ -6,6 +6,8 @@
 // @version     1.0
 // @author      -
 // @description 25/04/2024, 4:56:38 am
+// @downloadURL https://github.com/ngtantai1001/userscript/raw/main/src/Watch%20later%20v1%20youtube.com.user.js
+// @updateURL   https://github.com/ngtantai1001/userscript/raw/main/src/Watch%20later%20v1%20youtube.com.user.js
 // ==/UserScript==
 
 //#region todo

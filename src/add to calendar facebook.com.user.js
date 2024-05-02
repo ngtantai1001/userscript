@@ -131,9 +131,9 @@ function parseTime() {
     // }
 
     let arrRegex = [
-        [/\d{2}h\d{2}/, 'HHmm', 'h'],
-        [/\d{2}g\d{2}/, 'HHmm', 'g'],
-        [/\d{2}:\d{2}/, 'HHmm', ':'],
+        [/\d{1,2}h\d{1,2}/, 'HHmm', 'h'],
+        [/\d{1,2}g\d{1,2}/, 'HHmm', 'g'],
+        [/\d{1,2}:\d{1,2}/, 'HHmm', ':'],
     ]
     for (const regexItem of arrRegex) {
         let regex = regexItem[0]

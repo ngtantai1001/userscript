@@ -77,6 +77,11 @@ const element_mouse_hover_nodeNames = [
 
     'ytd-video-preview',
     'ytd-compact-infocard-renderer',
+
+
+
+
+    '.ytp-videowall-still',
 ]
 
 // on press A add to watch later
@@ -125,6 +130,7 @@ document.addEventListener('keydown', async function (e) {
 
     if (e.key === 'q') {
         interactUI_moveToTop();
+        moveToTop_restApi_addRemoveWatchlaLater();
         console.log(e.key);
     }
 
@@ -133,34 +139,98 @@ document.addEventListener('keydown', async function (e) {
         console.log(e.key);
     }
 
-    if (e.key === '1') {
-        console.log(e.key);
-
-        let element = getElementMouseHover();
-        if (!element) return;
-
-        flash(element);
-
-        let done = false;
-
+    if ((e.key === 'j' || e.key === 'l') && e.altKey == true) {
         try {
-            let videoId = getVideoIdFromElement(element);
-            await apiRestful_removeFromWatchLater(videoId);
-            await apiRestful_addToWatchLater(videoId);
-            flash(element, 'green');
-            done = true;
-        } catch (error) {
-            flash(element, 'red');
-            done = false;
-        }
+            console.log(e.key);
+            let ytdplaylistpanelvideoList = [];
+            document.querySelectorAll('ytd-playlist-video-renderer, ytd-video-renderer').forEach((el, i) => {
+                let videoId = getVideoIdFromElement(el);
+                let timestatus = el.querySelector('ytd-thumbnail-overlay-time-status-renderer badge-shape')?.textContent;
+                let timestatusNumber = timestatus.replaceAll(':', '');
+                let percentNumber = Number(el.querySelector('ytd-thumbnail-overlay-resume-playback-renderer #progress')?.style?.width?.replace('%', '')) || 0;
+                ytdplaylistpanelvideoList.push({ videoId, timestatus, timestatusNumber, percentNumber })
+            });
+            console.log(ytdplaylistpanelvideoList);
 
-        if (done === false) {
-            await interactUI_removeFromWatchLater().then(flash(element, 'green'));
-            await interactUI_addToWatchLater().then(flash(element, 'green'));
+            // alt + l ten_ytdplaylistpanelvideoList sort time, get 50, random index, remove WL, add WL (add to top)
+            if (e.key === 'j') {
+                let ten_ytdplaylistpanelvideoList = ytdplaylistpanelvideoList.sort((a, b) => {
+                    if (!a.timestatus || !b.timestatus) return 0;
+                    return a.timestatusNumber > b.timestatusNumber ? 1 : -1;
+                }).splice(0, 50).sort(() => Math.random() - 0.5);
+
+                console.log(ten_ytdplaylistpanelvideoList);
+                window.apiRestful_playlist = apiRestful_playlist;
+                flash();
+
+                await apiRestful_playlist(ten_ytdplaylistpanelvideoList.map(item => [
+                    {
+                        'removedVideoId': item.videoId,
+                        'action': 'ACTION_REMOVE_VIDEO_BY_VIDEO_ID'
+                    }
+                ]), 'WL');
+                await apiRestful_playlist(ten_ytdplaylistpanelvideoList.map(item => [
+                    {
+                        'addedVideoId': item.videoId,
+                        'action': 'ACTION_ADD_VIDEO'
+                    }
+                ]), 'WL');
+                flash('green');
+
+            }
+
+            // alt + l ten_to_removeFromWatchlater_ytdplaylistpanelvideoList
+            if (e.key === 'l') {
+                let ten_to_removeFromWatchlater_ytdplaylistpanelvideoList = ytdplaylistpanelvideoList.filter(a => {
+                    if (a && a.percentNumber && a.percentNumber && typeof a.percentNumber === 'number' && a.percentNumber > 80) {
+                        return a;
+                    }
+                }).splice(0, 10);
+                console.log({ ten_to_removeFromWatchlater_ytdplaylistpanelvideoList });
+                flash();
+
+                await apiRestful_playlist(ten_to_removeFromWatchlater_ytdplaylistpanelvideoList.map(item => [
+                    {
+                        'removedVideoId': item.videoId,
+                        'action': 'ACTION_REMOVE_VIDEO_BY_VIDEO_ID'
+                    }
+                ]), 'WL');
+                flash('green');
+            }
+
+        } catch (error) {
+            flash('red');
+            console.error(error);
         }
     }
 
+
 });
+async function moveToTop_restApi_addRemoveWatchlaLater() {
+    if (window.location.href.includes('playlist?list=WL')) return;
+    let element = getElementMouseHover();
+    if (!element) return;
+
+    flash(element);
+
+    let done = false;
+
+    try {
+        let videoId = getVideoIdFromElement(element);
+        await apiRestful_removeFromWatchLater(videoId);
+        await apiRestful_addToWatchLater(videoId);
+        flash(element, 'green');
+        done = true;
+    } catch (error) {
+        flash(element, 'red');
+        done = false;
+    }
+
+    if (done === false) {
+        await interactUI_removeFromWatchLater().then(flash(element, 'green'));
+        await interactUI_addToWatchLater().then(flash(element, 'green'));
+    }
+}
 async function interactUI_addToWatchLater() {
     let element = getElementMouseHover();
     if (!element) return
@@ -393,25 +463,21 @@ function getElementMouseHover() {
 
     let element = null;
 
-    // let temp = document.querySelectorAll(':hover');
-    // temp = [...temp];
-    // temp = temp.reverse();
-
-
-    // console.log('elements_mouse_hover', temp)
-
-    // let i = [].findIndex.call(temp, function (el) {
-    //     // return el.nodeName.toLocaleLowerCase() == 'ytd-playlist-video-renderer';
-    //     let check = [].includes.call(element_mouse_hover_nodeNames, el.nodeName.toLocaleLowerCase());
-    //     return check;
-    // });
-
     document.querySelectorAll(':hover').forEach((el, i) => {
         if (element) return;
         if ([].includes.call(element_mouse_hover_nodeNames, el.nodeName.toLocaleLowerCase())) {
             element = el;
         }
     });
+
+    if (!element) {
+        document.querySelectorAll(':hover').forEach((el, i) => {
+            if (element) return;
+            if (Array.from(el.classList).includes('ytp-videowall-still')) {
+                element = el;
+            }
+        });
+    }
 
 
     console.log('element_mouse_hover', element)
